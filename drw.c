@@ -199,7 +199,7 @@ drw_clr_create(Drw *drw, Clr *dest, const char *clrname, unsigned int alpha)
 /* Wrapper to create color schemes. The caller has to call free(3) on the
  * returned color scheme when done using it. */
 Clr *
-drw_scm_create(Drw *drw, const char *clrnames[], const unsigned int alphas[], size_t clrcount)
+drw_scm_create(Drw *drw, char *clrnames[], const unsigned alpha[], size_t clrcount)
 {
 	size_t i;
 	Clr *ret;
@@ -209,7 +209,7 @@ drw_scm_create(Drw *drw, const char *clrnames[], const unsigned int alphas[], si
 		return NULL;
 
 	for (i = 0; i < clrcount; i++)
-		drw_clr_create(drw, &ret[i], clrnames[i], alphas[i]);
+		drw_clr_create(drw, &ret[i], clrnames[i], alpha[i]);
 	return ret;
 }
 
