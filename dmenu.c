@@ -887,7 +887,10 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	snprintf(fullname, sizeof(fullname), "%s.%s", "dmenu", name);
 	fullname[sizeof(fullname) - 1] = '\0';
 	XrmGetResource(db, fullname, "*", &type, &ret);
-	if (!(ret.addr == NULL || strncmp("String", type, 64)))
+	if (!(strcmp("prompt", name))) {
+        prompt = malloc(strlen(ret.addr));
+        strcpy(prompt, ret.addr);
+    } else if (!(ret.addr == NULL || strncmp("String", type, 64)))
 	{
 		switch (rtype) {
 		case STRING:
@@ -1177,6 +1180,7 @@ main(int argc, char *argv[])
 	setup();
 	run();
 
+    free(prompt);
 	return 1; /* unreachable */
 }
 
