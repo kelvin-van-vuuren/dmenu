@@ -911,7 +911,7 @@ resource_load(XrmDatabase db, char *name, enum resource_type rtype, void *dst)
 	fullname[sizeof(fullname) - 1] = '\0';
 	XrmGetResource(db, fullname, "*", &type, &ret);
 	if (!(strcmp("prompt", name))) {
-        prompt = malloc(strlen(ret.addr));
+        prompt = malloc(strlen(ret.addr) + 1);
         strcpy(prompt, ret.addr);
     } else if (!(ret.addr == NULL || strncmp("String", type, 64)))
 	{
